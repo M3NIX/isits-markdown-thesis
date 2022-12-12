@@ -1,0 +1,36 @@
+\begin{titlepage}
+\makeatletter
+
+\enlargethispage{3cm}
+
+\begin{tikzpicture}[remember picture,overlay]
+\node[shift={(14cm,-23cm)},opacity=1] {\includegraphics[scale=0.625]{data/logo/hgi_syssec_1}};
+\node[shift={(13cm,1.22cm)},opacity=1] {\includegraphics[scale=1.8]{data/logo/Logo_RUB_BLAU_4c}};
+\end{tikzpicture}
+ 
+\vspace*{10cm}
+\begin{minipage}[b]{1\linewidth}
+	\sffamily
+  	\hspace{-17.2mm}\includegraphics[scale=1.0]{data/logo/rub_slogan}\\
+
+   	\textbf{\LARGE {TITEL}}\\
+  
+  	\Large{AUTHOR}\\
+		
+% 	\vspace{3cm}
+  	\normalsize{
+			\thtype\/ Thesis\@~~--~~01.02.2034\@.\\
+			Chair for System Security.\\
+		}
+		\newline
+	  \normalsize{
+	    \begin{tabular}{@{}ll@{}}
+	      1st Supervisor: & Prof.~Dr.~Thorsten~Holz\\
+	      2nd Supervisor: & Prof.~Dr.~Someone~Else\\
+	      Advisor: & Another Guy, Maybe Another\\
+	      \end{tabular}
+	  }
+\end{minipage}
+
+\makeatother
+\end{titlepage}

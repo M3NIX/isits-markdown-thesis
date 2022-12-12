@@ -1,0 +1,17 @@
+---
+pdf-engine: xelatex
+number-sections: true
+highlight-style: pygments
+csl: ./latex/citation.csl
+include-in-header: 
+  - ./latex/preamble.tex
+resource-path: 
+  - ./
+  - ./markdown
+output-file: report.pdf
+variables:
+  lang: de
+  fontsize: 11pt
+  documentclass: report
+  papersize: a4paper
+  classoption: openright
