@@ -1,2 +1,2 @@
 pdf:
-	pandoc -d config.yaml markdown/01_introduction.md
+	pandoc -d config.yaml markdown/*.md

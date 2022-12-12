@@ -151,13 +151,6 @@ $if(multirow)$
 \usepackage{multirow}
 $endif$
 \usepackage{calc} % for calculating minipage widths
-$if(beamer)$
-\usepackage{caption}
-% Make caption package work with longtable
-\makeatletter
-\def\fnum@table{\tablename~\thetable}
-\makeatother
-$else$
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
 \makeatletter
@@ -166,7 +159,6 @@ $else$
 % Allow footnotes in longtable head/foot
 \IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
 \makesavenoteenv{longtable}
-$endif$
 $endif$
 $if(graphics)$
 \usepackage{graphicx}
@@ -195,8 +187,6 @@ $if(numbersections)$
 $else$
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 $endif$
-$if(beamer)$
-$else$
 $if(block-headings)$
 % Make \paragraph and \subparagraph free-standing
 \ifx\paragraph\undefined\else
@@ -207,7 +197,6 @@ $if(block-headings)$
   \let\oldsubparagraph\subparagraph
   \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
-$endif$
 $endif$
 $if(pagestyle)$
 \pagestyle{$pagestyle$}

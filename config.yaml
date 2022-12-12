@@ -14,11 +14,11 @@ variables:
   documentclass: scrreprt
   papersize: a4paper
   classoption: openright
-  # change these values to your like
+  # change the following values to your like
   title: "My awsome Master thesis"
   thesis-type: Master's
   author: "Julian Ortel"
-  date: "06.06.6666"
+  date: "01.02.2034"
   toc: true # Table of contents
   lof: true # List of figures
   lot: true # List of tables
