@@ -13,7 +13,8 @@ output-file: thesis.pdf
 variables:
   lang: de
   fontsize: 11pt
-  documentclass: report
+  #documentclass: report
+  documentclass: scrreprt
   papersize: a4paper
   classoption: openright
   # change these values

@@ -27,6 +27,9 @@ $endif$
 $for(classoption)$
   $classoption$$sep$,
 $endfor$
+cleardoublepage=plain,
+parskip=half+, % comment this out if you do not want an empty half line between paragraphs, but please read the KomaScript Guide and search for parskip (around page 82): ftp://ftp.dante.de/pub/tex/macros/latex/contrib/koma-script/scrguide.pdf
+BCOR=1cm, % Bindekorrektur: Change this accordingly, also read the KomaScript Guide! Make sure you read the guide.
 ]{$documentclass$}
 $if(beamer)$
 $if(background-image)$
@@ -466,7 +469,7 @@ $if(title)$
   	\Large{$author$}\\
     $endif$
 		
-  	\vspace{3cm}
+  	\vspace{4cm}
   	\normalsize{
 			\thtype\/ Thesis\@~~--~~$date$\@.\\
 			Chair for System Security.\\
