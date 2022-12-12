@@ -474,9 +474,11 @@ $if(title)$
 		\newline
 	  \normalsize{
 	    \begin{tabular}{@{}ll@{}}
-	      1st Supervisor: & Prof.~Dr.~Thorsten~Holz\\
-	      2nd Supervisor: & Prof.~Dr.~Someone~Else\\
-	      Advisor: & Another Guy, Maybe Another\\
+	      1st Supervisor: & $supervisor_1$\\
+	      2nd Supervisor: & $supervisor_2$\\
+        $if(advisor)$
+	      Advisor: & $advisor$\\
+        $endif$
 	      \end{tabular}
 	  }
 \end{minipage}

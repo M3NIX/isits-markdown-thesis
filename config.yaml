@@ -9,13 +9,16 @@ include-in-header:
 resource-path: 
   - ./
   - ./markdown
-output-file: report.pdf
+output-file: thesis.pdf
 variables:
   lang: de
   fontsize: 11pt
   documentclass: report
   papersize: a4paper
   classoption: openright
+  # change these values
   title: "My awsome Master thesis"
   author: "Julian Ortel"
   date: "06.06.6666"
+  supervisor_1: "Prof. Dr. Thorsten Holz"
+  supervisor_2: "Prof. Dr. Someone Else"
