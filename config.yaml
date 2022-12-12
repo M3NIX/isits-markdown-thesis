@@ -4,8 +4,6 @@ number-sections: true
 highlight-style: pygments
 template: ./latex/template.tex
 csl: ./latex/citation.csl
-include-in-header: 
-  - ./latex/preamble.tex
 resource-path: 
   - ./
   - ./markdown
@@ -13,13 +11,18 @@ output-file: thesis.pdf
 variables:
   lang: de
   fontsize: 11pt
-  #documentclass: report
   documentclass: scrreprt
   papersize: a4paper
   classoption: openright
-  # change these values
+  # change these values to your like
   title: "My awsome Master thesis"
+  thesis-type: Master's
   author: "Julian Ortel"
   date: "06.06.6666"
-  supervisor_1: "Prof. Dr. Thorsten Holz"
-  supervisor_2: "Prof. Dr. Someone Else"
+  toc: true # Table of contents
+  lof: true # List of figures
+  lot: true # List of tables
+  # add all latex files you want to put before your document
+  input-before:
+    - latex/titlepage.tex
+    #- latex/statement.tex

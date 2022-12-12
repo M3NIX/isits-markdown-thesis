@@ -7,7 +7,6 @@ $endif$
 $if(CJKmainfont)$
 \PassOptionsToPackage{space}{xeCJK}
 $endif$
-%
 \documentclass[
 $if(fontsize)$
   $fontsize$,
@@ -15,75 +14,13 @@ $endif$
 $if(papersize)$
   $papersize$paper,
 $endif$
-$if(beamer)$
-  ignorenonframetext,
-$if(handout)$
-  handout,
-$endif$
-$if(aspectratio)$
-  aspectratio=$aspectratio$,
-$endif$
-$endif$
 $for(classoption)$
   $classoption$$sep$,
 $endfor$
 cleardoublepage=plain,
 parskip=half+, % comment this out if you do not want an empty half line between paragraphs, but please read the KomaScript Guide and search for parskip (around page 82): ftp://ftp.dante.de/pub/tex/macros/latex/contrib/koma-script/scrguide.pdf
-BCOR=1cm, % Bindekorrektur: Change this accordingly, also read the KomaScript Guide! Make sure you read the guide.
 ]{$documentclass$}
-$if(beamer)$
-$if(background-image)$
-\usebackgroundtemplate{%
-  \includegraphics[width=\paperwidth]{$background-image$}%
-}
-$endif$
-\usepackage{pgfpages}
-\setbeamertemplate{caption}[numbered]
-\setbeamertemplate{caption label separator}{: }
-\setbeamercolor{caption name}{fg=normal text.fg}
-\beamertemplatenavigationsymbols$if(navigation)$$navigation$$else$empty$endif$
-$for(beameroption)$
-\setbeameroption{$beameroption$}
-$endfor$
-% Prevent slide breaks in the middle of a paragraph
-\widowpenalties 1 10000
-\raggedbottom
-$if(section-titles)$
-\setbeamertemplate{part page}{
-  \centering
-  \begin{beamercolorbox}[sep=16pt,center]{part title}
-    \usebeamerfont{part title}\insertpart\par
-  \end{beamercolorbox}
-}
-\setbeamertemplate{section page}{
-  \centering
-  \begin{beamercolorbox}[sep=12pt,center]{part title}
-    \usebeamerfont{section title}\insertsection\par
-  \end{beamercolorbox}
-}
-\setbeamertemplate{subsection page}{
-  \centering
-  \begin{beamercolorbox}[sep=8pt,center]{part title}
-    \usebeamerfont{subsection title}\insertsubsection\par
-  \end{beamercolorbox}
-}
-\AtBeginPart{
-  \frame{\partpage}
-}
-\AtBeginSection{
-  \ifbibliography
-  \else
-    \frame{\sectionpage}
-  \fi
-}
-\AtBeginSubsection{
-  \frame{\subsectionpage}
-}
-$endif$
-$endif$
-$if(beamerarticle)$
-\usepackage{beamerarticle} % needs to be loaded first
-$endif$
+
 \usepackage{amsmath,amssymb}
 $if(fontfamily)$
 \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
@@ -170,26 +107,6 @@ $if(zero-width-non-joiner)$
 \fi
 %% End of ZWNJ support
 $endif$
-$if(beamer)$
-$if(theme)$
-\usetheme[$for(themeoptions)$$themeoptions$$sep$,$endfor$]{$theme$}
-$endif$
-$if(colortheme)$
-\usecolortheme{$colortheme$}
-$endif$
-$if(fonttheme)$
-\usefonttheme{$fonttheme$}
-$endif$
-$if(mainfont)$
-\usefonttheme{serif} % use mainfont rather than sansfont for slide text
-$endif$
-$if(innertheme)$
-\useinnertheme{$innertheme$}
-$endif$
-$if(outertheme)$
-\useoutertheme{$outertheme$}
-$endif$
-$endif$
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \IfFileExists{microtype.sty}{% use microtype if available
@@ -214,14 +131,7 @@ $if(verbatim-in-note)$
 $endif$
 \usepackage{xcolor}
 $if(geometry)$
-$if(beamer)$
-\geometry{$for(geometry)$$geometry$$sep$,$endfor$}
-$else$
 \usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
-$endif$
-$endif$
-$if(beamer)$
-\newif\ifbibliography
 $endif$
 $if(listings)$
 \usepackage{listings}
@@ -384,6 +294,7 @@ $endif$
 $if(verbatim-in-note)$
 \VerbatimFootnotes % allow verbatim text in footnotes
 $endif$
+\usepackage{tikz}
 \hypersetup{
 $if(title-meta)$
   pdftitle={$title-meta$},
@@ -412,159 +323,79 @@ $else$
   hidelinks,
 $endif$
 $endif$
-  pdfcreator={LaTeX via pandoc}}
+  pdfcreator={LaTeX via pandoc}
+}
 
+
+% Define some variables
 $if(title)$
 \title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
 $endif$
+
 $if(subtitle)$
-$if(beamer)$
-$else$
-\usepackage{etoolbox}
-\makeatletter
-\providecommand{\subtitle}[1]{% add subtitle to \maketitle
-  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
-}
-\makeatother
-$endif$
 \subtitle{$subtitle$}
 $endif$
+
 \author{$for(author)$$author$$sep$ \and $endfor$}
+
+$if(date)$
 \date{$date$}
-$if(beamer)$
-$if(institute)$
-\institute{$for(institute)$$institute$$sep$ \and $endfor$}
-$endif$
-$if(titlegraphic)$
-\titlegraphic{\includegraphics{$titlegraphic$}}
-$endif$
-$if(logo)$
-\logo{\includegraphics{$logo$}}
-$endif$
+$else$
+\date{\today}
 $endif$
 
+$if(thesis-type)$
+\newcommand{\thtype}{$thesis-type$}
+$else$
+\newcommand{\thtype}{Master's}
+$endif$
+
+% Begin the latex document
 \begin{document}
-$if(has-frontmatter)$
-\frontmatter
-$endif$
-$if(title)$
-\begin{titlepage}
-\makeatletter
 
-\enlargethispage{3cm}
-
-\begin{tikzpicture}[remember picture,overlay]
-\node[shift={(14cm,-23cm)},opacity=1] {\includegraphics[scale=0.625]{data/logo/hgi_syssec_1}};
-\node[shift={(13cm,1.22cm)},opacity=1] {\includegraphics[scale=1.8]{data/logo/Logo_RUB_BLAU_4c}};
-\end{tikzpicture}
- 
-\vspace*{10cm}
-\begin{minipage}[b]{1\linewidth}
-	\sffamily
-  	\hspace{-17.2mm}\includegraphics[scale=1.0]{data/logo/rub_slogan}\\
-
-   	\textbf{\LARGE {$title$}}\\
-  
-    $if(author)$
-  	\Large{$author$}\\
-    $endif$
-		
-  	\vspace{4cm}
-  	\normalsize{
-			\thtype\/ Thesis\@~~--~~$date$\@.\\
-			Chair for System Security.\\
-		}
-		\newline
-	  \normalsize{
-	    \begin{tabular}{@{}ll@{}}
-	      1st Supervisor: & $supervisor_1$\\
-	      2nd Supervisor: & $supervisor_2$\\
-        $if(advisor)$
-	      Advisor: & $advisor$\\
-        $endif$
-	      \end{tabular}
-	  }
-\end{minipage}
-
-\makeatother
-\end{titlepage}
-$endif$
+$for(input-before)$
+\input{$input-before$}
+$endfor$
 
 $for(include-before)$
 $include-before$
-
 $endfor$
-$if(toc)$
+
+$if(toc)$ % Table of contents
 $if(toc-title)$
 \renewcommand*\contentsname{$toc-title$}
 $endif$
-$if(beamer)$
-\begin{frame}[allowframebreaks]
-$if(toc-title)$
-  \frametitle{$toc-title$}
-$endif$
-  \tableofcontents[hideallsubsections]
-\end{frame}
-$else$
-{
-$if(colorlinks)$
-\hypersetup{linkcolor=$if(toccolor)$$toccolor$$else$$endif$}
-$endif$
-\setcounter{tocdepth}{$toc-depth$}
+\pagenumbering{gobble} % Disable numbering style
 \tableofcontents
-}
+\newpage
 $endif$
-$endif$
-$if(lof)$
-\listoffigures
-$endif$
-$if(lot)$
-\listoftables
-$endif$
-$if(linestretch)$
-\setstretch{$linestretch$}
-$endif$
-$if(has-frontmatter)$
-\mainmatter
-$endif$
+
+\pagenumbering{arabic} % Start Arabic numbering style
 $body$
+\newpage
 
-$if(has-frontmatter)$
-\backmatter
-$endif$
-$if(natbib)$
-$if(bibliography)$
-$if(biblio-title)$
-$if(has-chapters)$
-\renewcommand\bibname{$biblio-title$}
-$else$
-\renewcommand\refname{$biblio-title$}
-$endif$
-$endif$
-$if(beamer)$
-\begin{frame}[allowframebreaks]{$biblio-title$}
-  \bibliographytrue
-$endif$
-  \bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
-$if(beamer)$
-\end{frame}
+\pagenumbering{roman} % Start Roman numbering style
+
+$if(lof)$ % List of figures
+\phantomsection
+\listoffigures
+\addcontentsline{toc}{chapter}{\listfigurename}
+\newpage
 $endif$
 
+$if(lot)$ % List of tables
+\phantomsection
+\listoftables
+\addcontentsline{toc}{chapter}{\listtablename}
+\newpage
 $endif$
-$endif$
+
 $if(biblatex)$
-$if(beamer)$
-\begin{frame}[allowframebreaks]{$biblio-title$}
-  \bibliographytrue
-  \printbibliography[heading=none]
-\end{frame}
-$else$
 \printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
 $endif$
 
-$endif$
 $for(include-after)$
 $include-after$
-
 $endfor$
+
 \end{document}
