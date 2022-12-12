@@ -2,6 +2,7 @@
 pdf-engine: xelatex
 number-sections: true
 highlight-style: pygments
+template: ./latex/template.tex
 csl: ./latex/citation.csl
 include-in-header: 
   - ./latex/preamble.tex
@@ -15,3 +16,6 @@ variables:
   documentclass: report
   papersize: a4paper
   classoption: openright
+  title: "My awsome Master thesis"
+  author: "Julian Ortel"
+  date: "06.06.6666"
