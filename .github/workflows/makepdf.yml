@@ -13,11 +13,14 @@ jobs:
       #     version: 1.0
       #     execute_install_scripts: true
 
-      - name: install packages
-        run: sudo apt install -y pandoc texlive-latex-recommended texlive-xetex texlive-science python3-pygments python3-pip
+      # - name: install packages
+      #   run: sudo apt install -y pandoc texlive-latex-recommended texlive-xetex texlive-science python3-pygments python3-pip
 
-      - name: make pdf
-        run: make pdf
+      # - name: make pdf
+      #   run: make pdf
+      - uses: docker://pandoc/core:2.9
+        with:
+          args: "-d config.yaml markdown/*.md"
 
       - name: commit files
         run: |
