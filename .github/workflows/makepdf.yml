@@ -11,6 +11,7 @@ jobs:
         with:
           packages: pandoc texlive-latex-recommended texlive-xetex texlive-science python3-pygments python3-pip
           version: 1.0
+          execute_install_scripts: true
 
       - name: make pdf
         run: make pdf
