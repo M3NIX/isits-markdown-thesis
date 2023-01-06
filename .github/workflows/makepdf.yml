@@ -1,5 +1,5 @@
 name: Generate pdf
-run-name: Generate pdf for commit ${{ github.ref_name }}
+run-name: Generate pdf for commit ${{ github.sha }}
 on: [push]
 jobs:
   install:
