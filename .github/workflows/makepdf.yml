@@ -7,7 +7,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: awalsh128/cache-apt-pkgs-action@latest
         with:
-          packages: pandoc texlive texlive-xetex python3-pip
+          packages: pandoc texlive-latex-recommended texlive-xetex texlive-science python3-pygments python3-pip
           version: 1.0
       #- run: sudo apt install -y pandoc texlive python3-pip
       - run: make pdf
