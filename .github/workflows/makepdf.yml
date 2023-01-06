@@ -1,8 +1,9 @@
-name: Generate pdf
-run-name: Generate pdf for commit ${{ github.sha }}
+name: make pdf
 on: [push]
 jobs:
-  install:
+  main:
     runs-on: ubuntu-latest
     steps:
       - run: sudo apt install -y pandoc texlive python3-pip
+      - run: make pdf
+
