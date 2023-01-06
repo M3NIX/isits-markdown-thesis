@@ -18,9 +18,14 @@ jobs:
 
       # - name: make pdf
       #   run: make pdf
+      #
+      - name: create file list
+        id: files_list
+        run: echo "::set-output name=files::$(printf '"%s" ' markdown/*.md)"
+
       - uses: docker://pandoc/latex:latest
         with:
-          args: "-d config.yaml markdown/*.md"
+          args: "-d config.yaml ${{ steps.files_list.outputs.files }}"
 
       - name: commit files
         run: |
