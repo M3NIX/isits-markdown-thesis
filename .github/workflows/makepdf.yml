@@ -6,12 +6,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: install and cache packages
-        uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: pandoc texlive-latex-recommended texlive-xetex texlive-science python3-pygments python3-pip
-          version: 1.0
-          execute_install_scripts: true
+      # - name: install and cache packages
+      #   uses: awalsh128/cache-apt-pkgs-action@latest
+      #   with:
+      #     packages: pandoc texlive-latex-recommended texlive-xetex texlive-science python3-pygments python3-pip
+      #     version: 1.0
+      #     execute_install_scripts: true
+
+      - name: install packages
+        run: sudo apt install -y pandoc texlive-latex-recommended texlive-xetex texlive-science python3-pygments python3-pip
 
       - name: make pdf
         run: make pdf
