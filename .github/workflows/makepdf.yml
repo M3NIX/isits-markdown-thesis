@@ -4,6 +4,11 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - run: sudo apt install -y pandoc texlive python3-pip
+      - uses: actions/checkout@v2
+      - uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: pandoc texlive python3-pip
+          version: 1.0
+      #- run: sudo apt install -y pandoc texlive python3-pip
       - run: make pdf
 
