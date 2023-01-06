@@ -5,4 +5,4 @@ jobs:
   makepdf:
     runs-on: ubuntu-latest
     steps:
-      - run: apt install pandoc
+      - run: sudo apt install -y pandoc
