@@ -1,0 +1,605 @@
+%% Author: julian@ortel.tech
+%% modified default pandoc template `pandoc -D latex`
+
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+
+\documentclass[
+  11pt,
+  a4paper,
+  openright,
+  cleardoublepage=plain,
+  parskip=half+, % comment this out if you do not want an empty half line between paragraphs, but please read the KomaScript Guide and search for parskip (around page 82): ftp://ftp.dante.de/pub/tex/macros/latex/contrib/koma-script/scrguide.pdf
+]{scrreprt}
+
+%% general stuff
+
+% language
+\usepackage{iflang}
+\usepackage[ngerman]{babel}
+
+% fonts
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+
+% code blocks
+\definecolor{colKeys}{rgb}{0,0,1}
+\definecolor{colIdentifier}{rgb}{0,0,0}
+\definecolor{colComments}{rgb}{0.5, 0.5, 0.5}
+\definecolor{colString}{rgb}{0,0.5,0}
+\usepackage{listings}
+\IfLanguageName{english}{
+  \renewcommand{\lstlistingname}{Algorithm}
+}{}
+\IfLanguageName{ngerman}{
+  \renewcommand{\lstlistingname}{Algorithmus}
+}{}
+\lstset{%
+    float=hbp,%
+    basicstyle=\ttfamily\scriptsize, %
+    identifierstyle=\color{colIdentifier}, %
+    keywordstyle=\color{colKeys}, %
+    stringstyle=\color{colString}, %
+    commentstyle=\color{colComments}, %
+    columns=flexible, %
+    tabsize=2, %
+    frame=single, %
+    extendedchars=true, %
+    showspaces=false, %
+    showstringspaces=false, %
+    numberstyle=\tiny, %
+    breaklines=true, %
+    backgroundcolor=, %
+    breakautoindent=true, %
+    captionpos=b%
+}
+\newcommand{\passthrough}[1]{#1}
+\lstset{defaultdialect=[5.3]Lua}
+\lstset{defaultdialect=[x86masm]Assembler}
+
+% tables
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+
+% images
+\usepackage{graphicx}
+\usepackage{float}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+% \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setkeys{Gin}{keepaspectratio}
+\makeatletter
+\def\fps@figure{H} % Set default figure placement to H
+\makeatother
+
+% misc
+
+% headings / pagestyle
+\usepackage[bottom]{footmisc} % position footnotes at the bottom of the document
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+
+% bibliography
+\usepackage[square,numbers]{natbib}
+\bibliographystyle{dinat}
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{tikz}
+
+% pdf settings
+\hypersetup{
+  pdftitle={Mein toller Titel für die Masterarbeit},
+  pdfauthor={Julian Ortel},
+  pdflang={ngerman},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}
+}
+
+\usepackage{acro}
+\DeclareAcronym{isits}{
+short = isits,
+long = International School of IT Security
+}
+
+% BEGIN: variable defininiton (e.g. for the titlepage)
+\title{Mein toller Titel für die Masterarbeit}
+
+
+\author{Julian Ortel}
+
+\date{01.02.2034}
+
+\newcommand{\thtype}{Masterarbeit}
+% END: define some variables
+
+% BEGIN: latex document
+\begin{document}
+
+\input{latex/titlepage.tex}
+\input{latex/statement.tex}
+
+
+ % table of contents
+\pagenumbering{gobble} % disable numbering style
+\tableofcontents
+\newpage
+
+
+\pagenumbering{arabic} % start Arabic numbering style
+\hypertarget{abstract}{%
+\chapter*{Abstract}\label{abstract}}
+\addcontentsline{toc}{chapter}{Abstract}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Convallis aenean et
+tortor at risus. Risus ultricies tristique nulla aliquet enim tortor at
+auctor. Molestie ac feugiat sed lectus vestibulum mattis ullamcorper.
+Lectus arcu bibendum at varius vel pharetra vel turpis nunc. Cursus
+mattis molestie a iaculis at erat. Amet mattis vulputate enim nulla
+aliquet porttitor. Mauris augue neque gravida in fermentum et
+sollicitudin ac. Vel turpis nunc eget lorem dolor. Arcu vitae elementum
+curabitur vitae nunc sed. Diam quis enim lobortis scelerisque fermentum
+dui faucibus in ornare. Sagittis aliquam malesuada bibendum arcu vitae
+elementum curabitur vitae. Sem integer vitae justo eget magna.
+
+Gravida cum sociis natoque penatibus et. Elementum curabitur vitae nunc
+sed. Nunc consequat interdum varius sit amet mattis. Sed euismod nisi
+porta lorem. Volutpat lacus laoreet non curabitur gravida. Pulvinar
+etiam non quam lacus suspendisse. Vulputate odio ut enim blandit. Sed
+felis eget velit aliquet sagittis id consectetur purus ut. Et leo duis
+ut diam quam nulla porttitor. Ut eu sem integer vitae justo eget magna
+fermentum iaculis. Tellus in metus vulputate eu scelerisque. Elit duis
+tristique sollicitudin nibh sit amet. Convallis a cras semper auctor
+neque vitae. Mauris pharetra et ultrices neque. Sagittis eu volutpat
+odio facilisis mauris. Facilisi nullam vehicula ipsum a arcu cursus
+vitae. Accumsan sit amet nulla facilisi morbi tempus. Vitae sapien
+pellentesque habitant morbi tristique senectus et.
+
+Enim facilisis gravida neque convallis. Mauris ultrices eros in cursus
+turpis. Non quam lacus suspendisse faucibus interdum posuere. Aliquet
+porttitor lacus luctus accumsan tortor posuere ac. Eu sem integer vitae
+justo eget magna. Eu nisl nunc mi ipsum faucibus. Pulvinar mattis nunc
+sed blandit libero volutpat. Dictum non consectetur a erat nam. Fusce ut
+placerat orci nulla pellentesque dignissim. Tincidunt dui ut ornare
+lectus sit amet est. Neque laoreet suspendisse interdum consectetur
+libero id faucibus nisl tincidunt. Porta nibh venenatis cras sed.
+Praesent semper feugiat nibh sed pulvinar proin gravida hendrerit
+lectus. Egestas tellus rutrum tellus pellentesque eu tincidunt. Non
+pulvinar neque laoreet suspendisse interdum consectetur libero id
+faucibus. Feugiat vivamus at augue eget. Hendrerit gravida rutrum
+quisque non tellus orci. Pellentesque elit ullamcorper dignissim cras
+tincidunt lobortis feugiat. Rhoncus urna neque viverra justo nec
+ultrices.
+
+\hypertarget{uxfcberschrift}{%
+\chapter{Überschrift}\label{uxfcberschrift}}
+
+Te \emph{concepit} pollice fugit vias alumno \textbf{oras} quam potest
+\href{http://example.com\#rursus}{rursus} optat. Non evadere orbem
+equorum, spatiis, vel pede inter si.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  De neque iura aquis
+\item
+  Frangitur gaudia mihi eo umor terrae quos
+\item
+  Recens diffudit ille tantum
+\end{enumerate}
+
+Tamen condeturque saxa Pallorque num et ferarum promittis inveni lilia
+iuvencae adessent arbor. Florente perque at condeturque saxa et ferarum
+promittis tendebat. Armos nisi obortas refugit me.
+
+\begin{quote}
+Et nepotes poterat, se qui. Euntem ego pater desuetaque aethera
+Maeandri, et \href{http://example.com\#Dardanio_geminaque}{Dardanio
+geminaque} cernit. Lassaque poenas nec, manifesta \(\pi r^2\) mirantia
+captivarum prohibebant scelerato gradus unusque dura.
+\end{quote}
+
+\begin{itemize}
+\tightlist
+\item
+  Permulcens flebile simul
+\item
+  Iura tum nepotis causa motus diva virtus Acrota. Tamen condeturque
+  saxa Pallorque num et ferarum promittis inveni lilia iuvencae adessent
+  arbor. Florente perque at ire arcum.
+\end{itemize}
+
+\hypertarget{unteruxfcberschrift}{%
+\section{Unterüberschrift}\label{unteruxfcberschrift}}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Viverra aliquet eget
+sit amet tellus. Arcu dictum varius duis at.
+
+\hypertarget{unterunteruxfcberschrift}{%
+\subsection{Unterunterüberschrift}\label{unterunteruxfcberschrift}}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Viverra aliquet eget
+sit amet tellus. Arcu dictum varius duis at.
+
+\hypertarget{beispielinhalte}{%
+\chapter{Beispielinhalte}\label{beispielinhalte}}
+
+\hypertarget{tabellen}{%
+\section{Tabellen}\label{tabellen}}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule()
+Header A & Header B & Header C \\
+\midrule()
+\endhead
+Value A1 & Value B1 & Value C1 \\
+Value A2 & Value B2 & Value C2 \\
+Value A3 & Value B3 & Value C3 \\
+Value A4 & Value B4 & Value C4 \\
+\bottomrule()
+\end{longtable}
+
+\begin{longtable}[]{@{}lll@{}}
+\caption{Tabelle mit Überschrift \label{tbl:short-table}}\tabularnewline
+\toprule()
+Header A & Header B & Header C \\
+\midrule()
+\endfirsthead
+\toprule()
+Header A & Header B & Header C \\
+\midrule()
+\endhead
+Value A1 & Value B1 & Value C1 \\
+Value A2 & Value B2 & Value C2 \\
+Value A3 & Value B3 & Value C3 \\
+Value A4 & Value B4 & Value C4 \\
+\bottomrule()
+\end{longtable}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.1266}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.8734}}@{}}
+\caption{Tabelle mit langen Zeilen
+\label{tbl:long-table}}\tabularnewline
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+Header A
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Header B
+\end{minipage} \\
+\midrule()
+\endfirsthead
+\toprule()
+\begin{minipage}[b]{\linewidth}\raggedright
+Header A
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Header B
+\end{minipage} \\
+\midrule()
+\endhead
+Value A1 & ut etiam sit amet nisl purus in mollis nunc sed id semper
+risus in hendrerit gravida rutrum quisque non tellus orci ac auctor
+augue mauris augue neque gravida in fermentum \\
+Value A2 & ut etiam sit amet nisl purus in mollis nunc sed id semper
+risus in hendrerit gravida rutrum quisque non tellus orci ac auctor
+augue mauris augue neque gravida in fermentum \\
+Value A3 & ut etiam sit amet nisl purus in mollis nunc sed id semper
+risus in hendrerit gravida rutrum quisque non tellus orci ac auctor
+augue mauris augue neque gravida in fermentum \\
+Value A4 & ut etiam sit amet nisl purus in mollis nunc sed id semper
+risus in hendrerit gravida rutrum quisque non tellus orci ac auctor
+augue mauris augue neque gravida in fermentum \\
+\bottomrule()
+\end{longtable}
+
+\hypertarget{bilder}{%
+\section{Bilder}\label{bilder}}
+
+\begin{figure}
+\hypertarget{fig:logo-isits}{%
+\centering
+\includegraphics[width=0.5\textwidth,height=\textheight]{././data/logo/isits-logo.jpg}
+\caption{Logo der International School of IT
+Security}\label{fig:logo-isits}
+}
+\end{figure}
+
+\begin{figure}
+\hypertarget{fig:logo-isits-small}{%
+\centering
+\includegraphics[width=0.1\textwidth,height=\textheight]{././data/logo/isits-logo.jpg}
+\caption{Logo der International School of IT Security -
+klein}\label{fig:logo-isits-small}
+}
+\end{figure}
+
+\hypertarget{code}{%
+\section{Code}\label{code}}
+
+\begin{lstlisting}[language=Python, caption={Fibonacci-Algorithmus in Python}, label={alg:fibonacci-python}]
+# Function for nth Fibonacci number
+def Fibonacci(n):
+   
+    # Check if input is 0 then it will
+    # print incorrect input
+    if n < 0:
+        print("Incorrect input")
+ 
+    # Check if n is 0
+    # then it will return 0
+    elif n == 0:
+        return 0
+ 
+    # Check if n is 1,2
+    # it will return 1
+    elif n == 1 or n == 2:
+        return 1
+ 
+    else:
+        return Fibonacci(n-1) + Fibonacci(n-2)
+ 
+# Driver Program
+print(Fibonacci(9))
+\end{lstlisting}
+
+Es ist sogar möglich Code aus anderen Dateien zu inkludieren:
+
+\begin{lstlisting}[caption=Makefile, label={alg:makefile}]
+docker-build:
+	docker build -t $$(id -un)/pandoc-latex .
+
+docker-pdf:
+	docker run --rm --volume "$$(pwd):/data" --user $$(id -u):$$(id -g) $$(id -un)/pandoc-latex make pdf
+
+docker-tex:
+	docker run --rm --volume "$$(pwd):/data" --user $$(id -u):$$(id -g) $$(id -un)/pandoc-latex make tex
+
+pdf: tex
+	latexmk thesis.tex -pdf
+
+tex: clean
+	pandoc -d pandoc/config.yml markdown/*.md -o thesis.tex
+
+.PHONY: clean
+clean:
+	find . -name 'thesis.*' -a ! -name '*.pdf' -a ! -name '*.tex' -exec rm {} \;
+\end{lstlisting}
+
+\hypertarget{querverweise}{%
+\section{Querverweise}\label{querverweise}}
+
+Querverweise können mit \passthrough{\lstinline!\\ref\{label\}!} oder
+\passthrough{\lstinline!\\autoref\{label\}!} erstellt werden.
+
+Beispiele:
+
+\begin{itemize}
+\tightlist
+\item
+  Querverweis zu \autoref{fazit} oder nur der Nummer (\ref{fazit}) vom
+  Kapitel
+\item
+  Querverweis zu \autoref{bilder} oder nur der Nummer (\ref{bilder}) vom
+  Abschnitt
+\item
+  Querverweis zu \autoref{fig:logo-isits} oder nur der Nummer
+  (\ref{fig:logo-isits}) vom Bild
+\item
+  Querverweis zu \autoref{alg:fibonacci-python} oder nur der Nummer
+  (\ref{alg:fibonacci-python}) vom Codeblock
+\item
+  Querverweis zu \autoref{tbl:long-table} oder nur der Nummer
+  (\ref{tbl:long-table}) von der Tabelle
+\item
+  Querverweis zu \autoref{eq:neighbor-propability} oder nur der Nummer
+  (\ref{eq:neighbor-propability}) von der Formel
+\end{itemize}
+
+\hypertarget{quellen}{%
+\section{Quellen}\label{quellen}}
+
+Quellen werden in der Datei
+\passthrough{\lstinline!data/references.bib!} gepflegt und konnen im
+Text mit \passthrough{\lstinline![@label]!} referenziert werden. Zum
+Beispiel stammt der Code für \autoref{alg:fibonacci-python} von
+\passthrough{\lstinline!geeksforgeek.org!} \citep{fibonacci-python}.
+
+\hypertarget{formeln}{%
+\section{Formeln}\label{formeln}}
+
+Mit \passthrough{\lstinline!$!} umschlossene Strings werden in der Zeile
+als Formel interpretiert: \(y = mx +b\)
+
+Eine komplette Formel kann als Block mit \passthrough{\lstinline!$$!}
+umschlossen werden: \[
+x = {-b \pm \sqrt{b^2-4ac} \over 2a}
+\]
+
+Die Verwendung von Latex innerhalb des Markdowns ist auch möglich:
+\begin{equation}\label{eq:neighbor-propability}
+    p_{ij}(t) = \frac{\ell_j(t) - \ell_i(t)}{\sum_{k \in N_i(t)}^{} \ell_k(t) - \ell_i(t)}
+\end{equation}
+
+\hypertarget{sonstiges}{%
+\section{Sonstiges}\label{sonstiges}}
+
+Fußnoten\footnote{https://github.com/M3NIX/isits-markdown-thesis} sind
+ebenfalls im Markdown-Style möglich.
+
+Abkürzungen wie \ac{isits} können auch verwendet werden und werden bei
+der ersten Verwendung automatisch ausgeschrieben und bei der zweiten
+Verwendung (hier: \ac{isits}) nicht mehr ausgeschrieben. Definiert
+werden diese in \passthrough{\lstinline!data/acronyms.yml!}.
+
+Pfeile werden durch den Pandoc-Filter
+\passthrough{\lstinline!pandoc/pandoc-latex-arrows.py!} automatisch
+umgewandelt:
+
+\begin{longtable}[]{@{}ccc@{}}
+\toprule()
+markdown & latex & pdf \\
+\midrule()
+\endhead
+\passthrough{\lstinline!->!} & \passthrough{\lstinline!$\\rightarrow$!}
+& $\rightarrow$ \\
+\passthrough{\lstinline!<-!} & \passthrough{\lstinline!$\\leftarrow$!} &
+$\leftarrow$ \\
+\passthrough{\lstinline!<->!} &
+\passthrough{\lstinline!$\\leftrightarrow$!} & $\leftrightarrow$ \\
+\passthrough{\lstinline!=>!} & \passthrough{\lstinline!$\\Rightarrow$!}
+& $\Rightarrow$ \\
+\passthrough{\lstinline!<=!} & \passthrough{\lstinline!$\\Leftarrow$!} &
+$\Leftarrow$ \\
+\passthrough{\lstinline!<=>!} &
+\passthrough{\lstinline!$\\Leftrightarrow$!} & $\Leftrightarrow$ \\
+\passthrough{\lstinline!==>!} &
+\passthrough{\lstinline!$\\Longrightarrow$!} & $\Longrightarrow$ \\
+\passthrough{\lstinline!<==!} &
+\passthrough{\lstinline!$\\Longleftarrow$!} & $\Longleftarrow$ \\
+\passthrough{\lstinline!<==>!} &
+\passthrough{\lstinline!$\\Longleftrightarrow$!} &
+$\Longleftrightarrow$ \\
+\bottomrule()
+\end{longtable}
+
+\hypertarget{fazit}{%
+\chapter{Fazit}\label{fazit}}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Convallis aenean et
+tortor at risus. Risus ultricies tristique nulla aliquet enim tortor at
+auctor. Molestie ac feugiat sed lectus vestibulum mattis ullamcorper.
+Lectus arcu bibendum at varius vel pharetra vel turpis nunc. Cursus
+mattis molestie a iaculis at erat. Amet mattis vulputate enim nulla
+aliquet porttitor. Mauris augue neque gravida in fermentum et
+sollicitudin ac. Vel turpis nunc eget lorem dolor. Arcu vitae elementum
+curabitur vitae nunc sed. Diam quis enim lobortis scelerisque fermentum
+dui faucibus in ornare. Sagittis aliquam malesuada bibendum arcu vitae
+elementum curabitur vitae. Sem integer vitae justo eget magna.
+
+Gravida cum sociis natoque penatibus et. Elementum curabitur vitae nunc
+sed. Nunc consequat interdum varius sit amet mattis. Sed euismod nisi
+porta lorem. Volutpat lacus laoreet non curabitur gravida. Pulvinar
+etiam non quam lacus suspendisse. Vulputate odio ut enim blandit. Sed
+felis eget velit aliquet sagittis id consectetur purus ut. Et leo duis
+ut diam quam nulla porttitor. Ut eu sem integer vitae justo eget magna
+fermentum iaculis. Tellus in metus vulputate eu scelerisque. Elit duis
+tristique sollicitudin nibh sit amet. Convallis a cras semper auctor
+neque vitae. Mauris pharetra et ultrices neque. Sagittis eu volutpat
+odio facilisis mauris. Facilisi nullam vehicula ipsum a arcu cursus
+vitae. Accumsan sit amet nulla facilisi morbi tempus. Vitae sapien
+pellentesque habitant morbi tristique senectus et.
+
+Enim facilisis gravida neque convallis. Mauris ultrices eros in cursus
+turpis. Non quam lacus suspendisse faucibus interdum posuere. Aliquet
+porttitor lacus luctus accumsan tortor posuere ac. Eu sem integer vitae
+justo eget magna. Eu nisl nunc mi ipsum faucibus. Pulvinar mattis nunc
+sed blandit libero volutpat. Dictum non consectetur a erat nam. Fusce ut
+placerat orci nulla pellentesque dignissim. Tincidunt dui ut ornare
+lectus sit amet est. Neque laoreet suspendisse interdum consectetur
+libero id faucibus nisl tincidunt. Porta nibh venenatis cras sed.
+Praesent semper feugiat nibh sed pulvinar proin gravida hendrerit
+lectus. Egestas tellus rutrum tellus pellentesque eu tincidunt. Non
+pulvinar neque laoreet suspendisse interdum consectetur libero id
+faucibus. Feugiat vivamus at augue eget. Hendrerit gravida rutrum
+quisque non tellus orci. Pellentesque elit ullamcorper dignissim cras
+tincidunt lobortis feugiat. Rhoncus urna neque viverra justo nec
+ultrices.
+\newpage
+
+\pagenumbering{roman} % start Roman numbering style
+
+ % list of figures
+\phantomsection
+\listoffigures
+\addcontentsline{toc}{chapter}{\listfigurename}
+\newpage
+
+
+ % list of tables
+\phantomsection
+\listoftables
+\addcontentsline{toc}{chapter}{\listtablename}
+\newpage
+
+
+ % list of tables
+\phantomsection
+\IfLanguageName{english}{
+  \renewcommand*{\lstlistlistingname}{List of Algorithms}
+}{}
+\IfLanguageName{ngerman}{
+  \renewcommand*{\lstlistlistingname}{Algorithmenverzeichnis}
+}{}
+\lstlistoflistings
+\addcontentsline{toc}{chapter}{\lstlistlistingname}
+\newpage
+
+
+\phantomsection
+\IfLanguageName{ngerman}{
+  \renewcommand*{\acrolistname}{Abkürzungsverzeichnis}
+}{}
+\printacronyms
+\addcontentsline{toc}{chapter}{\acrolistname}
+\newpage
+
+ % list of bibliography
+\phantomsection
+ % list all references, even when not used
+\nocite{*}
+
+\bibliography{./data/references.bib}
+\addcontentsline{toc}{chapter}{\bibname}
+\newpage
+
+
+
+\end{document}
+% END: latex document

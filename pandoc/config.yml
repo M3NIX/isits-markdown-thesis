@@ -1,0 +1,39 @@
+---
+template: ./latex/template.tex
+standalone: true
+number-sections: true
+listings: true
+cite-method: natbib
+bibliography: ./data/references.bib
+metadata-files:
+  - ./data/metadata.yml
+  - ./data/acronyms.yml
+resource-path: 
+  - ./
+  - ./markdown
+filters:
+  - pandoc-include
+  - pandoc-acro
+  - ./pandoc/pandoc-latex-arrows.py
+  - ./pandoc/pandoc-table-label.py
+variables:
+  # add all latex files (e.g. titlepage) you want to put before your content here
+  input-before:
+    - latex/titlepage.tex
+    - latex/statement.tex
+  # document setting
+  lang: ngerman # english
+  fontsize: 11pt
+  documentclass: scrreprt
+  papersize: a4paper
+  classoption: openright
+  # bibliography setting
+  natbiboptions: square,numbers
+  biblio-style: dinat
+  nocite: true
+  # lists settings
+  toc: true # table of contents
+  lof: true # list of figures
+  lot: true # list of tables
+  loa: true # list of algorithms
+  acro: true # list of acronyms

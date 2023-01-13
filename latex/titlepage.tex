@@ -1,0 +1,50 @@
+\begin{titlepage}
+\pagenumbering{gobble}
+\makeatletter
+
+\enlargethispage{3cm}
+
+\begin{tikzpicture}[remember picture,overlay]
+% \node[shift={(14cm,-23cm)},opacity=1] {\includegraphics[scale=0.625]{data/logo/hgi-logo}};
+\node[shift={(14cm,-23cm)},opacity=1] {\includegraphics[scale=0.15]{data/logo/isits-logo}};
+\node[shift={(13cm,1.22cm)},opacity=1] {\includegraphics[scale=1.8]{data/logo/rub-logo}};
+\end{tikzpicture}
+ 
+\vspace*{10cm}
+\begin{minipage}[b]{1\linewidth}
+	\sffamily
+  	\hspace{-17.2mm}\includegraphics[scale=1.0]{data/logo/rub-slogan}\\
+
+   	\textbf{\LARGE {\@title}}\\
+  
+  	\Large{\@author}\\
+		
+  	\vspace{3cm}
+  	\normalsize{
+   	  \thtype\@~~--~~\@date\@\\
+			\IfLanguageName{english}{
+			Chair for System Security.\\
+			}{}
+			\IfLanguageName{ngerman}{
+		  Lehrstuhl für Systemsicherheit\\
+			}{}
+		}
+		\newline
+	  \normalsize{
+	    \begin{tabular}{@{}ll@{}}
+			  \IfLanguageName{english}{
+				1st Supervisor: & Prof.~Dr.~Thorsten~Holz\\
+				2nd Supervisor: & Prof.~Dr.~Someone~Else\\
+				Advisor: & Another Guy, Maybe Another\\
+			  }{}
+			  \IfLanguageName{ngerman}{
+				1. Prüfer: & Prof.~Dr.~Thorsten~Holz\\
+				2. Prüfer: & Prof.~Dr.~Someone~Else\\
+				Betreuung: & Another Guy, Maybe Another\\
+			  }{}
+	      \end{tabular}
+	  }
+\end{minipage}
+
+\makeatother
+\end{titlepage}
