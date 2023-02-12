@@ -274,32 +274,34 @@ sit amet tellus. Arcu dictum varius duis at.
 \section{Tabellen}\label{tabellen}}
 
 \begin{longtable}[]{@{}lll@{}}
-\toprule()
+\toprule\noalign{}
 Header A & Header B & Header C \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Value A1 & Value B1 & Value C1 \\
 Value A2 & Value B2 & Value C2 \\
 Value A3 & Value B3 & Value C3 \\
 Value A4 & Value B4 & Value C4 \\
-\bottomrule()
 \end{longtable}
 
 \begin{longtable}[]{@{}lll@{}}
 \caption{Tabelle mit Überschrift \label{tbl:short-table}}\tabularnewline
-\toprule()
+\toprule\noalign{}
 Header A & Header B & Header C \\
-\midrule()
+\midrule\noalign{}
 \endfirsthead
-\toprule()
+\toprule\noalign{}
 Header A & Header B & Header C \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Value A1 & Value B1 & Value C1 \\
 Value A2 & Value B2 & Value C2 \\
 Value A3 & Value B3 & Value C3 \\
 Value A4 & Value B4 & Value C4 \\
-\bottomrule()
 \end{longtable}
 
 \begin{longtable}[]{@{}
@@ -307,22 +309,24 @@ Value A4 & Value B4 & Value C4 \\
   >{\raggedright\arraybackslash}p{(\columnwidth - 2\tabcolsep) * \real{0.8734}}@{}}
 \caption{Tabelle mit langen Zeilen
 \label{tbl:long-table}}\tabularnewline
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Header A
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Header B
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endfirsthead
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Header A
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Header B
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Value A1 & ut etiam sit amet nisl purus in mollis nunc sed id semper
 risus in hendrerit gravida rutrum quisque non tellus orci ac auctor
 augue mauris augue neque gravida in fermentum \\
@@ -335,7 +339,6 @@ augue mauris augue neque gravida in fermentum \\
 Value A4 & ut etiam sit amet nisl purus in mollis nunc sed id semper
 risus in hendrerit gravida rutrum quisque non tellus orci ac auctor
 augue mauris augue neque gravida in fermentum \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{bilder}{%
@@ -482,10 +485,12 @@ Pfeile werden durch den Pandoc-Filter
 umgewandelt:
 
 \begin{longtable}[]{@{}ccc@{}}
-\toprule()
+\toprule\noalign{}
 markdown & latex & pdf \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 \passthrough{\lstinline!->!} & \passthrough{\lstinline!$\\rightarrow$!}
 & $\rightarrow$ \\
 \passthrough{\lstinline!<-!} & \passthrough{\lstinline!$\\leftarrow$!} &
@@ -505,7 +510,6 @@ $\Leftarrow$ \\
 \passthrough{\lstinline!<==>!} &
 \passthrough{\lstinline!$\\Longleftrightarrow$!} &
 $\Longleftrightarrow$ \\
-\bottomrule()
 \end{longtable}
 
 \hypertarget{fazit}{%
