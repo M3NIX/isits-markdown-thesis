@@ -1,4 +1,4 @@
-FROM pandoc/core:3.1.1-ubuntu
+FROM pandoc/core:3.13-ubuntu
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update
