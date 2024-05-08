@@ -1,4 +1,4 @@
-FROM pandoc/core:3.1.1-ubuntu
+FROM pandoc/core:3.1.13-ubuntu
 
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update
@@ -6,7 +6,7 @@ RUN apt install -y make texlive-latex-recommended texlive-science texlive-latex-
 RUN rm -rf /var/lib/apt/lists/*
 
 COPY ./requirements.txt ./
-RUN python -m pip install -r requirements.txt
+RUN python -m pip install -r requirements.txt --break-system-packages
 
 ENTRYPOINT []
 WORKDIR /data
