@@ -8,7 +8,7 @@ bibliography: ./data/references.bib
 metadata-files:
   - ./data/metadata.yml
   - ./data/acronyms.yml
-resource-path: 
+resource-path:
   - ./
   - ./markdown
 filters:
@@ -29,7 +29,7 @@ variables:
   classoption: openright
   # bibliography setting
   natbiboptions: square,numbers
-  biblio-style: dinat
+  biblio-style: unsrtnat
   nocite: true
   # lists settings
   toc: true # table of contents
